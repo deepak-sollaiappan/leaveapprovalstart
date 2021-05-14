@@ -1,0 +1,18 @@
+{
+    "RequestId": "LEAVE_REQ_00_000",
+    "Title": "Requesting Leave",
+    "Requester": {
+        "Name":"Barry Allen",
+        "Email": "BarryAllen@DC.com",
+        "UserId":"BA000001",
+        "Comment":"Please approve the leave"
+    },
+    "Details": {
+        "TotalDays": 1,
+        "Division":"R&D",
+        "Country": "India",
+        "Reason": "Emergency"
+    }
+
+   
+}

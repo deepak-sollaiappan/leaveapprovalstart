@@ -1,0 +1,64 @@
+_schema-version: "3.2"
+ID: leaveapprovalstart
+version: 0.0.1
+modules:
+- name: leaveapprovalstart-approuter
+  type: approuter.nodejs
+  path: leaveapprovalstart-approuter
+  requires:
+  - name: leaveapprovalstart_html_repo_runtime
+  - name: uaa_leaveapprovalstart
+  - name: default_workflow
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: leaveapprovalstart_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: leaveapprovalstart_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - leaveapprovalstart-content.zip
+      name: leaveapprovalstart
+      target-path: resources/
+- name: leaveapprovalstart
+  type: html5
+  path: leaveapprovalstart
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: leaveapprovalstart_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: leaveapprovalstart_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: uaa_leaveapprovalstart
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: leaveapprovalstart-xsuaa-service
+    service-plan: application
+- name: default_workflow
+  type: org.cloudfoundry.existing-service
+  parameters:
+    service: workflow
+    service-plan: lite    
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install

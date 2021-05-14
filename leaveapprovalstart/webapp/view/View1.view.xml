@@ -1,0 +1,44 @@
+<mvc:View controllerName="namespace.leaveapprovalstart.controller.View1" 
+xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:l="sap.ui.layout"
+ xmlns:ux="sap.uxap" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page  id="page" title="Leave Request Form">
+					<content >
+                           <f:SimpleForm title="Requestor Details"  editable="true" layout="ResponsiveGridLayout"
+                           ><f:content >
+                                <Label text="Full Name"/>
+                                <Text text="{/Requester/Name}"/>
+                                <Label text="Email Address"/>
+                                <Text text="{/Requester/Email}"/>
+                                <Label text="User Id"/>
+                                <Text text="{/Requester/UserId}"/>
+                                 </f:content>
+                            </f:SimpleForm>
+                           <f:SimpleForm title="Leave Details" maxContainerCols="1" editable="true" layout="ResponsiveGridLayout">
+                                <Label text="Request Id"/>
+                                <Text text="{/RequestId}"/>
+                                <Label text="Title"/>
+                                <Text text="{/Title}"/>
+                                <Label text="Division"/>
+                                <Text text="{/Details/Division}"/>
+                                <Label text="Country"/>
+                                <Text text="{/Details/Country}"/>
+                                <Label text="Total Days"/>
+                                <Input id="TotalDays" value="{/Details/TotalDays}" required="true" width="50%"/>
+                                <Label text="Reason"/>
+                                <TextArea id="reason" value="{/Details/Reason}" required="true" width="50%"/>   
+                            </f:SimpleForm>
+                        </content>
+                    <footer>
+                        <Toolbar id="actionsToolbar">
+						    <ToolbarSpacer/>
+						     <Button id="btn" text="Apply Leave" type="Accept" press="onStartPress"/>
+					    </Toolbar>
+				    </footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
